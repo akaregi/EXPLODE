@@ -79,3 +79,70 @@ export function primes (n: number) {
 
     return primes.concat(search)
 }
+
+/**
+ * Judges if A, B, and C are pythagoren triple.
+ * 
+ * @param a A
+ * @param b B
+ * @param c C
+ */
+export function isPythagoreanTriple (a: number, b: number, c: number) {
+    return c ** 2 === a ** 2 + b ** 2   
+}
+
+/**
+ * Returns Nth number of Triangular Number.
+ * 
+ * @param n N
+ */
+export function triangularNumber (n: number) {
+    return n * (n + 1) / 2
+}
+
+/**
+ * Returns an array of divisors of N. 
+ * @param n N
+ */
+export function divisors(n: number) {
+    const divisors: number[] = Array()
+
+    sequence(n).forEach(i => {
+        if (n % i === 0) {
+            divisors.push(i)
+        }
+    })
+
+    return divisors
+}
+
+/**
+ * Calculates a collatz sequence from N to 1.
+ * 
+ * @param n Beginning
+ * @param memos Memo map
+ */
+export function collatz(n: number, memos?: Map<number, number[]>) {
+    const list = [n]
+
+    let now = n
+
+    while (true) {
+        if (now === 1) {
+            break
+        }
+
+        const succ = now % 2 === 0
+            ? now / 2
+            : 3 * now + 1
+
+        if (memos && memos.has(succ)) {
+            return list.concat(memos.get(succ) as number[])
+        }
+
+        list.push(succ)
+        now = succ
+    }
+
+    return list
+}
