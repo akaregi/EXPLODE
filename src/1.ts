@@ -1,13 +1,9 @@
 // https://projecteuler.net/problem=1
 
-let sum = 0;
+import { sequence } from 'lib/Array.ts'
 
-[...Array(1000).keys()].forEach(i => {
-    const now = i + 1
+const s = sequence(999)
+    .filter(n => n % 3 === 0 || n % 5 === 0)
+    .reduce((a, b) => a + b);
 
-    if (now % 3 === 0 || now % 5 === 0) {
-        sum += now
-    }
-})
-
-console.log(sum)
+console.log(s)
